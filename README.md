@@ -31,7 +31,7 @@ Ansible roles (or other means) that provide the following:
   - Apache HTTPD server (optional)
     - e.g. https://github.com/dheles/apache-ansible-role
   - Shibboleth authentication system (optional)
-    - e.g. https://github.com/dheles/apache-ansible-role
+    - e.g. https://github.com/farooqsadiq/shibboleth-sp-ansible-role
 
 
 Example Playbook
