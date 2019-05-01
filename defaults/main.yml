@@ -1,2 +1,8 @@
 ---
-# defaults file for vireo
+
+# user vars
+vireo_user:      "{{ app_user      | default('vireo') }}"
+vireo_group:     "{{ app_group     | default(vireo_user) }}"
+vireo_user_uid:  "{{ app_user_uid  | default(omit) }}"
+vireo_group_gid: "{{ app_group_gid | default(omit) }}"
+

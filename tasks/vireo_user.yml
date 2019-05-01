@@ -1,0 +1,14 @@
+---
+- name: add vireo user group
+  group:
+    name:     "{{ vireo_group }}"
+    gid:      "{{ vireo_group_gid | default(omit) }}"
+    state:    present
+
+- name: add vireo user
+  user:
+    name:     "{{ vireo_user }}"
+    shell:    "/bin/bash"
+    uid:      "{{ vireo_user_uid  | default(omit) }}"
+    group:    "{{ vireo_group }}"
+    comment:  "{{ vireo_user }} system account"

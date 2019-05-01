@@ -1,2 +1,5 @@
 ---
-# tasks file for vireo
+- include: vireo_user.yml
+  tags: ['user']
+  become: true
+
