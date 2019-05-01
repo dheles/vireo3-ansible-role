@@ -24,7 +24,7 @@ Ansible roles (or other means) that provide the following:
     - e.g. https://github.com/dheles/java-ansible-role
   - PostgreSQL 8.4, 9.1 or higher
     - e.g. https://github.com/dheles/postgres-ansible-role  
-  - Python 2.4 or higher
+  - Python 2.5 or higher
     - TODO. Most operating systems, including Centos 7, have python pre-installed
   - Play! framework 1.2.5, 1.3.x (but not 2.x)
     - e.g. https://github.com/dheles/play-ansible-role
