@@ -3,3 +3,5 @@
   tags: ['user']
   become: true
 
+- include: install.yml
+  tags: ['install']

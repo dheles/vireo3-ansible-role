@@ -1,0 +1,68 @@
+---
+# - name: setup vireo install directory
+#   file:
+#     path: "{{ vireo_install }}"
+#     owner: "{{ vireo_user }}"
+#     group: "{{ vireo_group }}"
+#     state: directory
+#   become: true
+
+- block:
+  # NOTE: keeping the release archive around to improve idempotency
+  # TODO: add checksum
+  - name: get vireo release
+    get_url:
+      url: "{{ vireo_release_url }}"
+      dest: "{{ vireo_download_dir }}"
+    register: release_downloaded
+
+  - name: unpack release
+    unarchive:
+      src: "{{ vireo_download_dir }}/{{ vireo_release }}.tar.gz"
+      dest: "{{ vireo_install_dir }}"
+      owner: "{{ vireo_user }}"
+      group: "{{ vireo_user }}"
+      remote_src: true
+    when: release_downloaded.changed
+
+  - name: remove previous install
+    file:
+      path: "{{ vireo_install }}"
+      state: absent
+    when: release_downloaded.changed
+
+  - name: rename release
+    command: "mv {{ vireo_install_dir }}/{{ vireo_release }} {{ vireo_install }}"
+    when: release_downloaded.changed
+
+  # NOTE: necessary to chown some files deep in the tree that
+  #  were resistant to the implicit chown in the unarchive step
+  - name: set ownership of install directory
+    file:
+      path: "{{ vireo_install }}"
+      owner: "{{ vireo_user }}"
+      group: "{{ vireo_group }}"
+      recurse: yes
+      state: directory
+  when: not vireo_from_repo
+
+- block:
+  - name: remove previous install
+    file:
+      path: "{{ vireo_install }}"
+      state: absent
+
+  - name: clone vireo from repo
+    git:
+      repo: "{{ vireo_repo }}"
+      dest: "{{ vireo_install }}"
+      version: "{{ vireo_branch | default('HEAD') }}"
+
+  - name: set ownership of install directory
+    file:
+      path: "{{ vireo_install }}"
+      owner: "{{ vireo_user }}"
+      group: "{{ vireo_group }}"
+      recurse: yes
+      state: directory
+  when: vireo_from_repo

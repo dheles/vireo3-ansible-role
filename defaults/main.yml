@@ -6,3 +6,18 @@ vireo_group:     "{{ app_group     | default(vireo_user) }}"
 vireo_user_uid:  "{{ app_user_uid  | default(omit) }}"
 vireo_group_gid: "{{ app_group_gid | default(omit) }}"
 
+# install vars
+vireo_major_version: 3
+vireo_minor_version: 0
+vireo_patch_version: 6
+vireo_version:       "{{ vireo_major_version }}.{{ vireo_minor_version }}.{{ vireo_patch_version }}"
+# to install from a repo: (you'd probably override this with your own fork)
+vireo_repo:         "https://github.com/TexasDigitalLibrary/Vireo.git"
+vireo_branch:       "{{ vireo_major_version }}.{{ vireo_minor_version }}.x"
+vireo_from_repo:    false
+# to install from a release:
+vireo_release:      "Vireo-{{ vireo_version }}"
+vireo_release_url:  "https://github.com/TexasDigitalLibrary/Vireo/archive/v{{ vireo_version }}.tar.gz"
+vireo_install_dir:  "/opt"
+vireo_install:      "{{ vireo_install_dir }}/Vireo"
+vireo_download_dir: "{{ ansible_env.HOME}}"
