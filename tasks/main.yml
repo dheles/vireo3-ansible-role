@@ -5,3 +5,12 @@
 
 - include: install.yml
   tags: ['install']
+
+- include: configure_db.yml
+  tags: ['config, db']
+
+- include: configure_vireo.yml
+  tags: ['config, vireo']
+
+- include: vireo_service.yml
+  tags: ['service']

@@ -12,3 +12,15 @@
     uid:      "{{ vireo_user_uid  | default(omit) }}"
     group:    "{{ vireo_group }}"
     comment:  "{{ vireo_user }} system account"
+
+# NOTE: it isn't clear that this is being used
+- name: add pgpass entry for vireo database
+  include: tasks/pgpass.yml
+  vars:
+    admin_user:   "{{ vireo_user }}"
+    admin_group:  "{{ vireo_group }}"
+    # host:         "{{ vireo_db_host | default('\\*') }}"
+    database:     "{{ vireo_db_name }}"
+    user:         "{{ vireo_db_user }}"
+    password:     "{{ vireo_db_pass }}"
+    state:        present

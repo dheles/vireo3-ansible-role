@@ -1,0 +1,12 @@
+---
+# NOTE: vireo database and database user assumed to be created
+# by the database role by this point
+
+# psql -U vireo vireo < [vireo]/conf/sql/postgresql/schema.sql
+# psql -U vireo vireo < [vireo]/conf/sql/postgresql/indexes.sql
+- name: create the database schema & indexes
+  shell: "psql -U {{ vireo_db_user }} {{ vireo_db_name }} < {{ vireo_install }}/conf/sql/postgresql/{{ item }}"
+  with_items: "{{ vireo_db_config_files }}"
+  register: result
+  become: true
+  become_user: "{{ vireo_user }}"
