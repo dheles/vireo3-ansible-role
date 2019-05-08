@@ -1,0 +1,29 @@
+---
+# TODO: handle systemd
+
+- name: get play path
+  shell: "bash -lc 'which play'"
+  register: play_result
+  changed_when: false
+
+- name: get java path
+  shell: "bash -lc 'echo $JAVA_HOME'"
+  register: java_result
+  changed_when: false
+
+- name: template play service for vireo
+  template:
+    src: "play.service.j2"
+    dest: "/etc/init.d/play"
+    mode :  "u=rwx,g=rx,o=rx"
+  vars:
+    play_path: "{{ play_result.stdout }}"
+    java_path: "{{ java_result.stdout }}"
+
+- name: enable and start play service
+  service:
+    name: "play"
+    enabled: true
+    state: started
+    pattern: "play"
+  become: true

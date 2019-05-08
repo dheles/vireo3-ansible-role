@@ -11,3 +11,6 @@
 
 - include: configure_vireo.yml
   tags: ['config, vireo']
+
+- include: vireo_service.yml
+  tags: ['service']
