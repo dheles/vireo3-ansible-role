@@ -1,5 +1,4 @@
 ---
-
 # user vars
 vireo_user:      "{{ app_user      | default('vireo') }}"
 vireo_group:     "{{ app_group     | default(vireo_user) }}"
@@ -21,3 +20,14 @@ vireo_release_url:  "https://github.com/TexasDigitalLibrary/Vireo/archive/v{{ vi
 vireo_install_dir:  "/opt"
 vireo_install:      "{{ vireo_install_dir }}/Vireo"
 vireo_download_dir: "{{ ansible_env.HOME}}"
+
+# db vars
+# NOTE: changes would be needed to support this:
+# vireo_db_host:            "DEFINE IF DB IS ON A SEPARATE HOST"
+vireo_db_user:              "{{ db_user | default('vireo') }}"
+vireo_db_name:              "{{ db_name | default('vireo') }}"
+vireo_db_pass:              "{{ db_pass | default('vireo') }}"
+# NOTE: override with an empty value [] after initial configuration
+vireo_db_config_files:
+- "schema.sql"
+- "indexes.sql"
