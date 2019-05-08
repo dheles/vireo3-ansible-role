@@ -1,12 +1,4 @@
 ---
-# - name: setup vireo install directory
-#   file:
-#     path: "{{ vireo_install }}"
-#     owner: "{{ vireo_user }}"
-#     group: "{{ vireo_group }}"
-#     state: directory
-#   become: true
-
 - block:
   # NOTE: keeping the release archive around to improve idempotency
   # TODO: add checksum
