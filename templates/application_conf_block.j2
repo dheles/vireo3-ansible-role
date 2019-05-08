@@ -1,0 +1,53 @@
+#
+# Environment: {{ vireo_environ }}
+# documentation: https://github.com/TexasDigitalLibrary/Vireo/wiki/Configuration
+# additional documentation: http://www.scottphillips.com/2012/12/configuring-vireo-2-0/#more-1170
+#
+# mode:
+# [dev, prod]
+%{{ vireo_environ }}.application.mode={{ vireo_application_mode }}
+#
+# logging:
+# [FATAL, ERROR, WARN, INFO, DEBUG, TRACE]
+%{{ vireo_environ }}.application.log={{ vireo_application_log }}
+#
+# Reverse routing URLs for background tasks. If you are proxying Vireo you
+# still need to turn on "PreserveHost On".
+# (TODO: figure out what that means...)
+%{{ vireo_environ }}.application.baseUrl={{ vireo_application_baseUrl }}
+#
+# Database
+# ~~~~~
+%{{ vireo_environ }}.db=postgres://localhost/{{ vireo_db_name }}
+%{{ vireo_environ }}.db.user={{ vireo_db_user }}
+%{{ vireo_environ }}.db.pass={{ vireo_db_pass }}
+#
+# Schema settings
+# - validate: validate the schema, makes no changes to the database
+# - update: update the schema
+# - create: creates the schema, destroying previous data.
+# - create-drop: drop the schema at the end of the session
+%{{ vireo_environ }}.jpa.ddl={{ vireo_schema_setting }}
+#
+# Mail
+# ~~~~~
+%{{ vireo_environ }}.mail.smtp.host={{ vireo_mail_smtp_host }}
+#
+%{{ vireo_environ }}.application.secret=
+#
+# File Size Validation
+# ~~~~~
+# set validate to true to enforce individual and total file size maximums during upload step.
+# not enforced in administrator interface (allowing overrides, when appropriate).
+%{{ vireo_environ }}.fileSize.validate={{ vireo_fileSize_validate }}
+%{{ vireo_environ }}.fileSize.maxFileSize={{ vireo_fileSize_maxFileSize }}
+%{{ vireo_environ }}.fileSize.maxFileSizeTotal={{ vireo_fileSize_maxFileSizeTotal }}
+#
+# Vireo Version
+# ~~~~~
+{% if vireo_from_repo %}
+%{{ vireo_environ }}.vireo.version={{ vireo_branch }}
+{% else %}
+%{{ vireo_environ }}.vireo.version={{ vireo_version }}
+{% endif %}
+#
