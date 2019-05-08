@@ -5,3 +5,6 @@
 
 - include: install.yml
   tags: ['install']
+
+- include: configure_db.yml
+  tags: ['config, db']
