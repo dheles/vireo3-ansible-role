@@ -49,3 +49,8 @@ vireo_mail_smtp_host:       "127.0.0.1"
 vireo_fileSize_validate:          true
 vireo_fileSize_maxFileSize:       512
 vireo_fileSize_maxFileSizeTotal:  4096
+
+# NOTE: assumes other roles have installed and configured apache proxying and shibboleth-sp
+# shibboleth vars
+vireo_shibbolize:                 false
+vireo_shib_config:                "shibboleth_conf_block_example.j2"
