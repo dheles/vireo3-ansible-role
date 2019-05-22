@@ -4,6 +4,8 @@
     block:  "{{ lookup('template', 'application_conf_block.j2') }}"
     dest: "{{ vireo_config_file }}"
     marker: "# {mark} {{ vireo_environ }} configs"
+    owner: "{{ vireo_user }}"
+    group: "{{ vireo_group }}"
 
 # apparently, it is still necessary to get test dependencies for all environments
 # hit same error may 2019 as back then: https://github.com/TexasDigitalLibrary/Vireo/issues/56
@@ -19,3 +21,9 @@
   args:
     chdir: "{{ vireo_install }}"
   no_log: "{{ not vireo_debugging }}"
+
+- name: reset ownership of config file
+  file:
+    path: "{{ vireo_config_file }}"
+    owner: "{{ vireo_user }}"
+    group: "{{ vireo_group }}"

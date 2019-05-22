@@ -1,0 +1,15 @@
+---
+- name: set vars that follow from the value of vireo_shibbolize
+  set_fact:
+    shib_config_presence: "absent"
+- set_fact:
+    shib_config_presence: "present"
+  when: vireo_shibbolize
+
+- name: insert configuration for shibboleth
+  blockinfile:
+    block:  "{{ lookup('template', vireo_shib_config) }}"
+    dest: "{{ vireo_config_file }}"
+    marker: "# {mark} {{ vireo_environ }} shib configs"
+    state: "{{ shib_config_presence }}"
+  become: true

@@ -17,6 +17,10 @@
 # Remember, you need python 2.6 to run the play command, it doesn't come standard with RedHat/Centos 5.5
 # Also, you may want to temporarily remove the >/dev/null for debugging purposes
 
+# NOTE: you have to make the first request to the play application for it to start
+# otherwise, attempting to get the service status will return this error:
+# Cannot retrieve the application status... (503)
+
 # Path to play install folder
 PLAY={{ play_path }}
 

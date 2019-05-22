@@ -1,0 +1,14 @@
+# Shibboleth Authentication Module
+# ~~~~~
+// Turn Shibboleth on
+%{{ vireo_environ }}.auth.shib.enabled = true
+%{{ vireo_environ }}.auth.shib.visible = true
+
+// Brand the Shibboleth authentication option, such as "TAMU NetID"
+%{{ vireo_environ }}.auth.shib.name = Shibboleth Authentication
+%{{ vireo_environ }}.auth.shib.description = a description of why a user should pick this method…. It may contain HTML.
+
+// Configure the Shibboleth initiator; for most the default settings are fine.
+%{{ vireo_environ }}.auth.shib.login.forceSSL = true
+%{{ vireo_environ }}.auth.shib.login.url = /Shibboleth.sso/Login?target=%1s
+%{{ vireo_environ }}.auth.shib.logout.url = /Shibboleth.sso/Logout?return=%1s
