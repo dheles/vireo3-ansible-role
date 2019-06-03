@@ -14,3 +14,6 @@
 
 - include: vireo_service.yml
   tags: ['service']
+
+- include: branding.yml
+  tags: ['branding']

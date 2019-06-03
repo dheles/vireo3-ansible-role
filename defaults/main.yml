@@ -54,3 +54,6 @@ vireo_fileSize_maxFileSizeTotal:  4096
 # shibboleth vars
 vireo_shibbolize:                 false
 vireo_shib_config:                "shibboleth_conf_block_example.j2"
+
+# branding vars:
+vireo_logos: []
