@@ -1,0 +1,13 @@
+---
+# NOTE: presently, the additional branding colors & styles are stored in the database
+# and restored along with the production data
+# TODO: automate styles
+
+- name: brand logos
+  copy:
+    src:  "{{ item }}"
+    dest: "{{ vireo_install }}/conf/theme/{{ item | basename | splitext | first }}"
+    owner: "{{ vireo_user }}"
+    group: "{{ vireo_group }}"
+  become: true
+  with_items: "{{ vireo_logos }}"
